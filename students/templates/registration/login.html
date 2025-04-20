@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Samson InfoSys</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'students/css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-color:rgb(120, 120, 121);
+        }
+        .login-box {
+            max-width: 400px;
+            margin: 5rem auto;
+            padding: 2rem;
+            background-color: #74b6e8;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.65);
+        }
+        .login-box:hover{
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.81);
+        }
+        .form-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background-color: #4a87b5;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+            color: #fff;
+        }
+        h3{
+            font: Times New Roman;
+        }
+        .form-title:hover{
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.85);
+        }
+        .login-box label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 0.35rem;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="form-title">
+                <h3 class="mb-0">Samson InfoSys</h3>
+                <small class="text-muted">Login to your account</small>
+            </div>
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ form.non_field_errors|striptags }}
+                </div>
+            {% endif %}
+            <form id="loginForm" method="post" novalidate>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small">
+                                {{ field.errors|striptags }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="reset" class="btn btn-secondary" onclick="resetForm()">Clear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <script>
+        function resetForm() {
+            document.getElementById("loginForm").reset();
+        }
+        //custom loading screen
+        document.getElementById("loginForm").addEventListener("submit", function () {
+            document.getElementById("loadingOverlay").style.display = "flex";
+        });
+        //disable right click and/or page source
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
+                event.preventDefault();
+            }
+            if (event.keyCode === 123) { // F12
+                event.preventDefault();
+            }
+        });
+    </script>
+    <script src="{% static 'students/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
