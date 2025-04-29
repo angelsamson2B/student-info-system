@@ -1,42 +1,45 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'students/css/bootstrap.min.css' %}">
+<link rel="icon" href="{% static 'students/favicon.png' %}" type="image/png">
+<title>Samson InfoSys - Add Student</title>
 <style>
-  body{
-    background-color:rgba(120, 120, 121, 0.84);
+  body {
+    background-color: rgba(120, 120, 121, 0.84);
   }
 </style>
 <div class="container mt-5">
-    <div class="card shadow-lg">
-      <div class="card-header bg-primary text-white">
-        <h2 class="mb-0">{{ form.instance.pk|yesno:"Edit Student,Add Student" }}</h2>
-      </div>
-      <div class="card-body">
-        <form method="post">
-          {% csrf_token %}
-          {% for field in form %}
-            <div class="mb-3">
-              <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-              {{ field }}
-              {% if field.errors %}
-                <div class="text-danger">{{ field.errors }}</div>
-              {% endif %}
-            </div>
-          {% endfor %}
-          <button type="submit" class="btn btn-success">Save</button>
-          <a href="{% url 'student_list' %}" class="btn btn-secondary ms-2">Back to List</a>
-        </form>
-      </div>
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">{{ form.instance.pk|yesno:"Edit Student,Add Student" }}</h2>
     </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="text-danger">{{ field.errors }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="reset" class="btn btn-warning ms-2">Clear</button> <!-- 👈 Added Clear button -->
+        <a href="{% url 'student_list' %}" class="btn btn-secondary ms-2">Back to List</a>
+      </form>
+    </div>
+  </div>
 </div>
 <script>
-  //disable right click and/or page source
+  // Disable right-click and certain keys (e.g., F12, Ctrl+U)
   document.addEventListener('contextmenu', event => event.preventDefault());
   document.addEventListener('keydown', function(event) {
-      if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
+    if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
       event.preventDefault();
-      }
-      if (event.keyCode === 123) { // F12
+    }
+    if (event.keyCode === 123) { // F12
       event.preventDefault();
-      }
+    }
   });
 </script>

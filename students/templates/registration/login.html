@@ -6,9 +6,10 @@
     <title>Login | Samson InfoSys</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'students/css/bootstrap.min.css' %}">
+    <link rel="icon" href="{% static 'students/favicon.png' %}" type="image/png">
     <style>
         body {
-            background-color:rgb(120, 120, 121);
+            background-color:rgb(75, 75, 107);
         }
         .login-box {
             max-width: 400px;
@@ -71,6 +72,21 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .footer-sys {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            font-size: 0.95rem;
+            color: #f8f9fa;
+            background-color:rgba(65, 75, 83, 0.56);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .footer-sys p {
+            margin: 0;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -107,6 +123,9 @@
     </div>
     <div id="loadingOverlay" class="loading-overlay" style="display: none;">
         <div class="spinner"></div>
+    </div>
+    <div class="footer-sys">
+        <p>If you have forgotten your password, please contact your system administrator for assistance.</p>
     </div>
     <script>
         function resetForm() {

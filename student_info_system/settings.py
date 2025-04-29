@@ -8,7 +8,7 @@ SECRET_KEY = '#4&=!&o16nc2-nol*_f47*-5-x=fwg0)dda2jd$61wr*4u6(wc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'ab76-103-13-184-42.ngrok-free.app', 'samsoninfosys.localtest.me']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.7', 'localhost', 'b735-131-226-104-8.ngrok-free.app', 'samsoninfosys.localtest.me']
 
 # Application definition
 INSTALLED_APPS = [
@@ -103,5 +103,5 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://ab76-103-13-184-42.ngrok-free.app',
+    'https://b735-131-226-104-8.ngrok-free.app',
 ]

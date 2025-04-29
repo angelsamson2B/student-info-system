@@ -35,11 +35,13 @@ def student_update(request, pk):
 
 def student_delete(request, pk):
     student = get_object_or_404(Student, pk=pk)
-    if request.method == 'POST':
-        student.delete()
-        return redirect('student_list')
-    return render(request, 'students/student_confirm_delete.html', {'student': student})
-
+    student_name = student.name  # Save name before deleting
+    student_id = student.id
+    student.delete()
+    return render(request, 'students/student_deleted.html', {
+        'student_id': student_id,
+        'student_name': student_name
+    })
 def custom_login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
